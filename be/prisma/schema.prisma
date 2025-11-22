@@ -18,6 +18,7 @@ model User {
   updatedAt  DateTime   @updatedAt
   otp        String?
   expOtp     DateTime?
+  photoUrl String?
   isVerify   Boolean?   @default(false)
   categories Category[]
   tasks      Task[]
