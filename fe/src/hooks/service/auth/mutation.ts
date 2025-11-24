@@ -19,7 +19,7 @@ import {
   FormSendOtp,
   FormUpdateProfile,
   FormVerifyOtp,
-} from "@/types/form/index";
+} from "@/types/form/auth.form";
 
 const AuthMutation = {
   useLogin() {

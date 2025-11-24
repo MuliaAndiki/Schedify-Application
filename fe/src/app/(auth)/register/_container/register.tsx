@@ -6,7 +6,7 @@ import { useState } from "react";
 import RegisterHeroSection from "@/components/section/auth/register-hero-section";
 import useService from "@/hooks/service/props.service";
 import { useAppNameSpase } from "@/hooks/useNameSpace";
-import { FormRegister } from "@/types/form";
+import { FormRegister } from "@/types/form/auth.form";
 const RegisterContainer = () => {
   const namespace = useAppNameSpase();
   const service = useService();

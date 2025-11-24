@@ -9,7 +9,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { FormResetPassword } from "@/types/form";
+import { FormResetPassword } from "@/types/form/auth.form";
 
 interface ResetProps {
   formResetPassword: FormResetPassword;

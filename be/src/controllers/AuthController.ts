@@ -507,11 +507,14 @@ class AuthController {
       });
     } catch (error) {
       console.error(error);
-      return c.json?.({
-        status: 500,
-        message: "Server Internal Error",
-        error: error instanceof Error ? error.message : error,
-      });
+      return c.json?.(
+        {
+          status: 500,
+          message: "Server Internal Error",
+          error: error instanceof Error ? error.message : error,
+        },
+        500
+      );
     }
   }
 }

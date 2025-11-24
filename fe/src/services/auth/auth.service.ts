@@ -7,7 +7,7 @@ import {
   FormSendOtp,
   FormUpdateProfile,
   FormVerifyOtp,
-} from "@/types/form/index";
+} from "@/types/form/auth.form";
 import AxiosClient from "@/utils/axios.client";
 
 class AuthApi {

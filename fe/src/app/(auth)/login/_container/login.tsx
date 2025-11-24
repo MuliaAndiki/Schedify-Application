@@ -6,7 +6,7 @@ import { useState } from "react";
 import LoginHeroSection from "@/components/section/auth/login-hero-section";
 import useService from "@/hooks/service/props.service";
 import { useAppNameSpase } from "@/hooks/useNameSpace";
-import { FormLogin } from "@/types/form";
+import { FormLogin } from "@/types/form/auth.form";
 
 const LoginContainer = () => {
   const namespace = useAppNameSpase();

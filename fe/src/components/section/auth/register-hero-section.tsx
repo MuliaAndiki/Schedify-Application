@@ -16,7 +16,7 @@ import {
   FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { FormRegister } from "@/types/form";
+import { FormRegister } from "@/types/form/auth.form";
 
 interface RegisterProps {
   formRegister: FormRegister;

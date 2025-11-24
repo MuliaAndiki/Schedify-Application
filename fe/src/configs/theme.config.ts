@@ -65,7 +65,7 @@ export const themeConfig: ThemeConfig = {
 
     muted: {
       background: "#F5EAFF",
-      foreground: "rgba(145, 29, 236, 0.7)",
+      foreground: "#1A1A1A",
     },
 
     accent: {

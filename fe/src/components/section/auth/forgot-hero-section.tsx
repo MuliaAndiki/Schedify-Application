@@ -9,7 +9,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { FormForgotPassword } from "@/types/form";
+import { FormForgotPassword } from "@/types/form/auth.form";
 
 interface ForgotProps {
   formForgot: FormForgotPassword;

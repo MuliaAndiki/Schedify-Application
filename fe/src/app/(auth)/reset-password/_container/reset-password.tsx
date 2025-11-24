@@ -7,7 +7,7 @@ import ResetPasswordHeroSection from "@/components/section/auth/reset-password-h
 import { useAppSelector } from "@/hooks/dispatch/dispatch";
 import useService from "@/hooks/service/props.service";
 import { useAppNameSpase } from "@/hooks/useNameSpace";
-import { FormResetPassword } from "@/types/form";
+import { FormResetPassword } from "@/types/form/auth.form";
 
 const ResetPasswordContainer = () => {
   const namespace = useAppNameSpase();

@@ -6,7 +6,7 @@ import VerifyOtpHeroSection from "@/components/section/auth/verifyOtp-hero-secti
 import { useAppSelector } from "@/hooks/dispatch/dispatch";
 import useService from "@/hooks/service/props.service";
 import { useAppNameSpase } from "@/hooks/useNameSpace";
-import { FormVerifyOtp } from "@/types/form";
+import { FormVerifyOtp } from "@/types/form/auth.form";
 const VerifyOtpContainer = () => {
   const namespase = useAppNameSpase();
   const service = useService();

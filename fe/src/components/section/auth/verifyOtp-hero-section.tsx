@@ -17,7 +17,7 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { FormVerifyOtp } from "@/types/form";
+import { FormVerifyOtp } from "@/types/form/auth.form";
 
 interface OTPFormProps {
   formVerifyOtp: FormVerifyOtp;

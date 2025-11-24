@@ -1,4 +1,4 @@
-export interface Auth {
+export interface IAuth {
   id: string;
   email: string;
   fullName: string;
@@ -14,17 +14,17 @@ export interface Auth {
 }
 
 export type JwtPayload = Pick<
-  Auth,
+  IAuth,
   "id" | "email" | "role" | "fullName" | "token"
 >;
 export type PickRegister = Pick<
-  Auth,
+  IAuth,
   "email" | "fullName" | "password" | "role"
 >;
-export type PickLogin = Pick<Auth, "email" | "password">;
-export type PickID = Pick<Auth, "id">;
-export type PickForgotPasswordEmail = Pick<Auth, "email">;
-export type PickVerify = Pick<Auth, "email" | "otp">;
-export type PickSendOtp = Pick<Auth, "email">;
-export type PickResetPassword = Pick<Auth, "email" | "password">;
-export type PickUpdateProfile = Pick<Auth, "email" | "fullName" | "photoUrl">;
+export type PickLogin = Pick<IAuth, "email" | "password">;
+export type PickID = Pick<IAuth, "id">;
+export type PickForgotPasswordEmail = Pick<IAuth, "email">;
+export type PickVerify = Pick<IAuth, "email" | "otp">;
+export type PickSendOtp = Pick<IAuth, "email">;
+export type PickResetPassword = Pick<IAuth, "email" | "password">;
+export type PickUpdateProfile = Pick<IAuth, "email" | "fullName" | "photoUrl">;

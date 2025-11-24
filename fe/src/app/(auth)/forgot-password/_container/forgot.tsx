@@ -6,7 +6,7 @@ import { useState } from "react";
 import ForgotHeroSection from "@/components/section/auth/forgot-hero-section";
 import useService from "@/hooks/service/props.service";
 import { useAppNameSpase } from "@/hooks/useNameSpace";
-import { FormForgotPassword } from "@/types/form";
+import { FormForgotPassword } from "@/types/form/auth.form";
 
 const ForgotContainer = () => {
   const namespace = useAppNameSpase();

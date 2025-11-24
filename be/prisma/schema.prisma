@@ -44,8 +44,7 @@ model Task {
   userId     String
   categoryId String
   todo       String
-  startAt    DateTime
-  endAt      DateTime?
+  endAt      String
   isDone     Boolean   @default(false)
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
