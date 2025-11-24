@@ -1,14 +1,13 @@
 "use client";
 
-import { Plus } from "lucide-react";
 import { useState } from "react";
-
-import TaskFilterPartial from "@/components/partial/private/task/task-filter";
+import { ITask, ICategory } from "@/types/schema";
+import { FormCreateTask } from "@/types/form/task.form";
 import TaskListPartial from "@/components/partial/private/task/task-list";
 import TaskModalPartial from "@/components/partial/private/task/task-modal";
+import TaskFilterPartial from "@/components/partial/private/task/task-filter";
 import { Button } from "@/components/ui/button";
-import { FormCreateTask } from "@/types/form/task.form";
-import { ICategory,ITask } from "@/types/schema";
+import { Plus } from "lucide-react";
 
 interface TaskHeroSectionProps {
   tasks: ITask[];
@@ -27,6 +26,10 @@ interface TaskHeroSectionProps {
   isPendingUpdate: boolean;
   isPendingDelete: boolean;
   onDone: (id: string) => void;
+  filterStatus: "all" | "done" | "pending";
+  setFilterStatus: React.Dispatch<
+    React.SetStateAction<"all" | "done" | "pending">
+  >;
 }
 
 const TaskHeroSection: React.FC<TaskHeroSectionProps> = ({
@@ -46,17 +49,19 @@ const TaskHeroSection: React.FC<TaskHeroSectionProps> = ({
   isPendingUpdate,
   isPendingDelete,
   onDone,
+  filterStatus,
+  setFilterStatus,
 }) => {
-  const [filterStatus, setFilterStatus] = useState<"all" | "done">("all");
-
   const filteredTasks = tasks.filter((task) => {
-    if (selectedCategoryId && task.categoryID !== selectedCategoryId)
-      return false;
-    if (filterStatus === "done") return task.isDone;
+    const categoryMatch =
+      selectedCategoryId === "all" || task.category.id === selectedCategoryId;
 
-    return true;
+    let statusMatch = true;
+    if (filterStatus === "done") statusMatch = task.isDone === true;
+    if (filterStatus === "pending") statusMatch = task.isDone === false;
+
+    return categoryMatch && statusMatch;
   });
-
   return (
     <div className="w-full h-full overflow-x-hidden relative">
       <div className="w-full flex flex-col gap-6 p-4">
@@ -78,17 +83,16 @@ const TaskHeroSection: React.FC<TaskHeroSectionProps> = ({
           selectedCategoryId={selectedCategoryId}
           filterStatus={filterStatus}
           onCategoryChange={onCategoryChange}
-          onFilterChange={setFilterStatus}
+          setFilterStatus={setFilterStatus}
         />
 
         <TaskListPartial
           tasks={filteredTasks}
-          categories={categories}
+          onDone={onDone}
           isLoading={isLoading}
           onEdit={onOpenModal}
           onDelete={onDelete}
           isPendingDelete={isPendingDelete}
-          onDone={onDone}
         />
       </div>
 

@@ -13,9 +13,11 @@ import { ICategory } from "@/types/schema";
 interface TaskFilterPartialProps {
   categories: ICategory[];
   selectedCategoryId: string;
-  filterStatus: "all" | "done";
+  filterStatus: "all" | "done" | "pending";
+  setFilterStatus: React.Dispatch<
+    React.SetStateAction<"all" | "done" | "pending">
+  >;
   onCategoryChange: (categoryId: string) => void;
-  onFilterChange: (status: "all" | "done") => void;
 }
 
 const TaskFilterPartial: React.FC<TaskFilterPartialProps> = ({
@@ -23,12 +25,15 @@ const TaskFilterPartial: React.FC<TaskFilterPartialProps> = ({
   selectedCategoryId,
   filterStatus,
   onCategoryChange,
-  onFilterChange,
+  setFilterStatus,
 }) => {
   return (
     <div className="flex gap-3 flex-wrap">
       <div className="flex-1 min-w-[200px]">
-        <Select value={selectedCategoryId} onValueChange={onCategoryChange}>
+        <Select
+          value={selectedCategoryId || "all"}
+          onValueChange={(value) => onCategoryChange(value)}
+        >
           <SelectTrigger>
             <SelectValue placeholder="Pilih kategori..." />
           </SelectTrigger>
@@ -44,27 +49,29 @@ const TaskFilterPartial: React.FC<TaskFilterPartialProps> = ({
       </div>
 
       <div className="flex gap-2">
-        <Button
-          variant={filterStatus === "all" ? "default" : "outline"}
-          size="sm"
-          onClick={() => onFilterChange("all")}
-        >
-          Semua
-        </Button>
-        {/* <Button
-          variant={filterStatus === "pending" ? "default" : "outline"}
-          size="sm"
-          onClick={() => onFilterChange("pending")}
-        >
-          Pending
-        </Button> */}
-        <Button
-          variant={filterStatus === "done" ? "default" : "outline"}
-          size="sm"
-          onClick={() => onFilterChange("done")}
-        >
-          Selesai
-        </Button>
+        <div className="flex gap-2">
+          <Button
+            variant={filterStatus === "pending" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setFilterStatus("pending")}
+          >
+            Pending
+          </Button>
+          <Button
+            variant={filterStatus === "done" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setFilterStatus("done")}
+          >
+            Selesai
+          </Button>
+          <Button
+            variant={filterStatus === "all" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setFilterStatus("all")}
+          >
+            Semua
+          </Button>
+        </div>
       </div>
     </div>
   );

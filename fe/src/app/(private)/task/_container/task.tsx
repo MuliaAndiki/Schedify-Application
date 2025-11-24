@@ -21,6 +21,9 @@ const TaskContainer = () => {
   const updateMutation = service.Task.mutation.useUpdate();
   const deleteMutation = service.Task.mutation.useDeleteByID();
   const doneMutation = service.Task.mutation.useDoneTask();
+  const [filterStatus, setFilterStatus] = useState<"all" | "done" | "pending">(
+    "all"
+  );
 
   const handleCreate = (payload: FormCreateTask) => {
     if (!payload.todo || !payload.endAt) {
@@ -91,6 +94,8 @@ const TaskContainer = () => {
       <main className="w-full min-h-screen flex flex-col">
         <TaskHeroSection
           tasks={taskQuery.TaskQuery}
+          filterStatus={filterStatus}
+          setFilterStatus={setFilterStatus}
           categories={categoryQuery.CategoryQuery}
           isLoading={taskQuery.isLoading}
           isOpen={isOpen}

@@ -39,13 +39,11 @@ const DashboardHeroSection: React.FC<DashboardProps> = ({
           </div>
         </div>
 
-        {/* Recent Categories */}
         <DashboardCategoryPartial
           categories={categories.slice(0, 3)}
           isLoading={isLoading}
         />
 
-        {/* Recent Tasks */}
         <DashboardTaskPartial
           tasks={recentTasks}
           categories={categories}

@@ -1,10 +1,6 @@
 "use client";
 
-import { format } from "date-fns";
-import { id as idLocale } from "date-fns/locale";
-import { Calendar,Edit2, Trash2 } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
+import { ITask, ICategory } from "@/types/schema";
 import {
   Card,
   CardContent,
@@ -12,13 +8,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Trash2, Edit2, Calendar } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ICategory,ITask } from "@/types/schema";
+import { format } from "date-fns";
+import { id as idLocale } from "date-fns/locale";
 
 interface TaskListPartialProps {
   tasks: ITask[];
-  categories: ICategory[];
   isLoading: boolean;
   onEdit: (id: string) => void;
   onDelete: (id: string) => void;
@@ -33,7 +31,6 @@ const TaskListPartial: React.FC<TaskListPartialProps> = ({
   onDelete,
   isPendingDelete,
   onDone,
-  categories,
 }) => {
   const formatDate = (date: string) => {
     try {
@@ -84,12 +81,7 @@ const TaskListPartial: React.FC<TaskListPartialProps> = ({
           <CardHeader>
             <div className="flex justify-between items-start gap-4">
               <div className="flex gap-3 flex-1">
-                <Checkbox
-                  checked={task.isDone}
-                  onClick={() => onDone(task.id)}
-                  className="mt-1"
-                  disabled
-                />
+                <Checkbox onClick={() => onDone(task.id)} className="mt-1" />
                 <div className="flex-1">
                   <CardTitle
                     className={`text-base ${

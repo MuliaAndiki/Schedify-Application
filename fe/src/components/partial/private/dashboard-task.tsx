@@ -85,7 +85,7 @@ const DashboardTaskPartial: React.FC<DashboardTaskPartialProps> = ({
                   </p>
                   <div className="flex items-center gap-2 mt-2 flex-wrap">
                     <span className="inline-block px-2 py-1 text-xs rounded-full bg-primary/10 text-primary">
-                      {getCategoryName(task.categoryID)}
+                      {getCategoryName(task.category.title)}
                     </span>
                     <span className="text-xs text-muted-foreground">
                       {formatDate(task.endAt)}
