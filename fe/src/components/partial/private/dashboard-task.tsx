@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ICategory,ITask } from "@/types/schema";
+import { ICategory, ITask } from "@/types/schema";
 
 interface DashboardTaskPartialProps {
   tasks: ITask[];
@@ -88,7 +88,7 @@ const DashboardTaskPartial: React.FC<DashboardTaskPartialProps> = ({
                       {getCategoryName(task.categoryID)}
                     </span>
                     <span className="text-xs text-muted-foreground">
-                      {formatDate(task.startAt)}
+                      {formatDate(task.endAt)}
                     </span>
                   </div>
                 </div>
