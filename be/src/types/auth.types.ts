@@ -1,10 +1,11 @@
-export interface Auth {
+export interface IAuth {
   id: string;
   email: string;
   fullName: string;
   password: string;
   token?: string;
   role: string;
+  photoUrl: string;
   createdAt: Date;
   updatedAt: Date;
   otp?: string;
@@ -12,10 +13,18 @@ export interface Auth {
   isVerify?: boolean;
 }
 
-export type JwtPayload = Pick<Auth, "id" | "email" | "role" | "fullName">;
+export type JwtPayload = Pick<
+  IAuth,
+  "id" | "email" | "role" | "fullName" | "token"
+>;
 export type PickRegister = Pick<
-  Auth,
+  IAuth,
   "email" | "fullName" | "password" | "role"
 >;
-export type PickLogin = Pick<Auth, "email" | "password">;
-export type PickLogout = Pick<Auth, "id">;
+export type PickLogin = Pick<IAuth, "email" | "password">;
+export type PickID = Pick<IAuth, "id">;
+export type PickForgotPasswordEmail = Pick<IAuth, "email">;
+export type PickVerify = Pick<IAuth, "email" | "otp">;
+export type PickSendOtp = Pick<IAuth, "email">;
+export type PickResetPassword = Pick<IAuth, "email" | "password">;
+export type PickUpdateProfile = Pick<IAuth, "email" | "fullName" | "photoUrl">;

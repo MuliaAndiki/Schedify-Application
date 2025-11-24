@@ -1,5 +1,13 @@
-import React from 'react';
-
+import {
+  Calendar,
+  Folder,
+  Home,
+  Inbox,
+  ListTodo,
+  Search,
+  Settings,
+} from "lucide-react";
+import React from "react";
 interface AppConfig {
   name: string;
   description: string;
@@ -36,36 +44,36 @@ interface AppConfig {
 }
 
 export const appConfig: AppConfig = {
-  name: 'App',
-  description: 'App',
-  logo: '/images/logo.png',
+  name: "App",
+  description: "App",
+  logo: "/images/logo.png",
   metadata: {
-    title: 'App',
-    description: 'App',
-    keywords: ['App'],
-    author: 'App',
-    image: 'App',
+    title: "App",
+    description: "App",
+    keywords: ["App"],
+    author: "App",
+    image: "App",
   },
   social_media: {
     twitter: {
-      url: 'https://twitter.com/app',
-      icon: 'hugeicons:new-twitter-rectangle',
+      url: "https://twitter.com/app",
+      icon: "hugeicons:new-twitter-rectangle",
     },
     instagram: {
-      url: 'https://instagram.com/app',
-      icon: 'basil:instagram-outline',
+      url: "https://instagram.com/app",
+      icon: "basil:instagram-outline",
     },
     linkedin: {
-      url: 'https://linkedin.com/app',
-      icon: 'tabler:brand-linkedin',
+      url: "https://linkedin.com/app",
+      icon: "tabler:brand-linkedin",
     },
     youtube: {
-      url: 'https://youtube.com/app',
-      icon: 'mingcute:youtube-line',
+      url: "https://youtube.com/app",
+      icon: "mingcute:youtube-line",
     },
     tiktok: {
-      url: 'https://tiktok.com/app',
-      icon: 'hugeicons:tiktok',
+      url: "https://tiktok.com/app",
+      icon: "hugeicons:tiktok",
     },
   },
 };
@@ -76,21 +84,44 @@ interface NavigationMenuConfig {
     href: string;
     icon?: React.ReactNode;
     description?: string;
-    children?: NavigationMenuConfig['items'];
+    children?: NavigationMenuConfig["items"];
   }[];
 }
 
 export const navigationMenuConfig: NavigationMenuConfig = {
   items: [
     {
-      title: 'Home',
-      href: '/',
-      description: 'Home',
+      title: "Home",
+      href: "/",
+      description: "Home",
     },
     {
-      title: 'Kelas',
-      href: '/kelas',
-      description: 'Kelas',
+      title: "Kelas",
+      href: "/kelas",
+      description: "Kelas",
     },
   ],
 };
+
+export const dashboardRoutes = [
+  {
+    title: "Dashboard",
+    url: "/dashboard",
+    icon: Home,
+  },
+  {
+    title: "Kategori",
+    url: "/category",
+    icon: Folder,
+  },
+  {
+    title: "Tugas",
+    url: "/task",
+    icon: ListTodo,
+  },
+  {
+    title: "Settings",
+    url: "/settings",
+    icon: Settings,
+  },
+];
