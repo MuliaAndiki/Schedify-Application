@@ -1,12 +1,13 @@
 "use client";
 
-import { ITask, ICategory } from "@/types/schema";
-import { Card, CardContent } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Checkbox } from "@/components/ui/checkbox";
-import Link from "next/link";
 import { format } from "date-fns";
 import { id as idLocale } from "date-fns/locale";
+import Link from "next/link";
+
+import { Card, CardContent } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Skeleton } from "@/components/ui/skeleton";
+import { ICategory,ITask } from "@/types/schema";
 
 interface DashboardTaskPartialProps {
   tasks: ITask[];

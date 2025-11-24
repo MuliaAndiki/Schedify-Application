@@ -1,12 +1,13 @@
 "use client";
 
+import { Plus } from "lucide-react";
 import { useState } from "react";
-import { ICategory } from "@/types/schema";
-import { FormCreateCategory } from "@/types/form/category.form";
+
 import CategoryListPartial from "@/components/partial/private/category/category-list";
 import CategoryModalPartial from "@/components/partial/private/category/category-modal";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { FormCreateCategory } from "@/types/form/category.form";
+import { ICategory } from "@/types/schema";
 
 interface CategoryHeroSectionProps {
   categories: ICategory[];

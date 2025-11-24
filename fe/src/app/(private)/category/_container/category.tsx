@@ -1,10 +1,11 @@
 "use client";
 
 import { useCallback, useState } from "react";
+
+import CategoryHeroSection from "@/components/section/private/category/category-hero-section";
 import { SidebarLayout } from "@/core/layouts/sidebar.layout";
 import useService from "@/hooks/service/props.service";
 import { useAppNameSpase } from "@/hooks/useNameSpace";
-import CategoryHeroSection from "@/components/section/private/category/category-hero-section";
 import { FormCreateCategory } from "@/types/form/category.form";
 import { PickCategoryID } from "@/types/form/category.form";
 

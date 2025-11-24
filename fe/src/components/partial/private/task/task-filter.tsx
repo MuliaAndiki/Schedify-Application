@@ -1,6 +1,6 @@
 "use client";
 
-import { ICategory } from "@/types/schema";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
+import { ICategory } from "@/types/schema";
 
 interface TaskFilterPartialProps {
   categories: ICategory[];

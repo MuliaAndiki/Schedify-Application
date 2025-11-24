@@ -1,11 +1,11 @@
 import {
   Calendar,
+  Folder,
   Home,
   Inbox,
+  ListTodo,
   Search,
   Settings,
-  ListTodo,
-  Folder,
 } from "lucide-react";
 import React from "react";
 interface AppConfig {

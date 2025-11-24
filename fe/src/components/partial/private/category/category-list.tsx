@@ -1,6 +1,8 @@
 "use client";
 
-import { ICategory } from "@/types/schema";
+import { Edit2,Trash2 } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -8,9 +10,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Trash2, Edit2 } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ICategory } from "@/types/schema";
 
 interface CategoryListPartialProps {
   categories: ICategory[];

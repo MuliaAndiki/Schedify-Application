@@ -1,6 +1,6 @@
-import HeaderDashboardPartial from "@/components/partial/private/header-dashboard";
 import DashboardCategoryPartial from "@/components/partial/private/dashboard-category";
 import DashboardTaskPartial from "@/components/partial/private/dashboard-task";
+import HeaderDashboardPartial from "@/components/partial/private/header-dashboard";
 import { IAuth, ICategory, ITask } from "@/types/schema";
 
 interface DashboardProps {

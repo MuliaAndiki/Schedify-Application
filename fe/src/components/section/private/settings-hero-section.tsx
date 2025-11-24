@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { IAuth } from "@/types/schema";
-import { FormUpdateProfile } from "@/types/form/auth.form";
-import { Button } from "@/components/ui/button";
+
 import SettingsProfilePartial from "@/components/partial/private/settings-profile";
 import SettingsSecurityPartial from "@/components/partial/private/settings-security";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -13,6 +12,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { FormUpdateProfile } from "@/types/form/auth.form";
+import { IAuth } from "@/types/schema";
 
 interface SettingsProps {
   userData: IAuth;

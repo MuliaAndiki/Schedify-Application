@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ICategory } from "@/types/schema";
-import { FormCreateCategory } from "@/types/form/category.form";
+
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -16,7 +16,8 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
+import { FormCreateCategory } from "@/types/form/category.form";
+import { ICategory } from "@/types/schema";
 
 interface CategoryModalPartialProps {
   isOpen: boolean;

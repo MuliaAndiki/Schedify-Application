@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ITask, ICategory } from "@/types/schema";
-import { FormCreateTask } from "@/types/form/task.form";
+
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -15,7 +15,6 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -23,7 +22,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { FormCreateTask } from "@/types/form/task.form";
+import { ICategory,ITask } from "@/types/schema";
 
 interface TaskModalPartialProps {
   isOpen: boolean;

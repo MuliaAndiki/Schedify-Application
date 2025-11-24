@@ -1,6 +1,7 @@
 "use client";
 
-import { ICategory } from "@/types/schema";
+import Link from "next/link";
+
 import {
   Card,
   CardContent,
@@ -9,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import Link from "next/link";
+import { ICategory } from "@/types/schema";
 
 interface DashboardCategoryPartialProps {
   categories: ICategory[];

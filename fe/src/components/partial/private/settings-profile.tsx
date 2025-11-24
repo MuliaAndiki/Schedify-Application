@@ -1,8 +1,10 @@
 "use client";
 
+import { Edit2 } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
-import { IAuth } from "@/types/schema";
-import { FormUpdateProfile } from "@/types/form/auth.form";
+
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -23,9 +25,8 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import { Edit2 } from "lucide-react";
+import { FormUpdateProfile } from "@/types/form/auth.form";
+import { IAuth } from "@/types/schema";
 
 interface SettingsProfilePartialProps {
   userData: IAuth;
