@@ -68,7 +68,7 @@ const CategoryModalPartial: React.FC<CategoryModalPartialProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-full max-w-md">
+      <DialogContent className="w-full max-w-sm">
         <DialogHeader>
           <DialogTitle>
             {editingId ? "Edit Kategori" : "Tambah Kategori Baru"}

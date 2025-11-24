@@ -21,6 +21,7 @@ const TaskContainer = () => {
   const updateMutation = service.Task.mutation.useUpdate();
   const deleteMutation = service.Task.mutation.useDeleteByID();
   const doneMutation = service.Task.mutation.useDoneTask();
+  const deleteAllMutation = service.Task.mutation.useDelete();
   const [filterStatus, setFilterStatus] = useState<"all" | "done" | "pending">(
     "all"
   );
@@ -89,6 +90,10 @@ const TaskContainer = () => {
     return doneMutation.mutate(id!);
   };
 
+  const handleDeleteALl = () => {
+    return deleteAllMutation.mutate({});
+  };
+
   return (
     <SidebarLayout>
       <main className="w-full min-h-screen flex flex-col">
@@ -106,11 +111,14 @@ const TaskContainer = () => {
           onCreate={handleCreate}
           onUpdate={handleUpdate}
           onDelete={handleDelete}
+          isPendingDeleteAll={deleteAllMutation.isPending}
+          onDeleteAll={handleDeleteALl}
           onCategoryChange={setSelectedCategoryId}
           onDone={handleDone}
           isPendingCreate={createMutation.isPending}
           isPendingUpdate={updateMutation.isPending}
           isPendingDelete={deleteMutation.isPending}
+          alert={namespace.alert}
         />
       </main>
     </SidebarLayout>

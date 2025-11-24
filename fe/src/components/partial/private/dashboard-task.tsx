@@ -7,23 +7,19 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ICategory, ITask } from "@/types/schema";
+import { ITask } from "@/types/schema";
 
 interface DashboardTaskPartialProps {
   tasks: ITask[];
-  categories: ICategory[];
   isLoading: boolean;
+  onDone: (id: string) => void;
 }
 
 const DashboardTaskPartial: React.FC<DashboardTaskPartialProps> = ({
   tasks,
-  categories,
   isLoading,
+  onDone,
 }) => {
-  const getCategoryName = (categoryId: string) => {
-    return categories.find((c) => c.id === categoryId)?.title || "Unknown";
-  };
-
   const formatDate = (date: string) => {
     try {
       return format(new Date(date), "dd MMM yyyy", { locale: idLocale });
@@ -74,7 +70,11 @@ const DashboardTaskPartial: React.FC<DashboardTaskPartialProps> = ({
           >
             <CardContent className="pt-4">
               <div className="flex items-start gap-3">
-                <Checkbox checked={task.isDone} disabled className="mt-1" />
+                <Checkbox
+                  onClick={() => onDone(task.id)}
+                  checked={task.isDone}
+                  className="mt-1"
+                />
                 <div className="flex-1">
                   <p
                     className={`text-sm font-medium ${
@@ -85,7 +85,7 @@ const DashboardTaskPartial: React.FC<DashboardTaskPartialProps> = ({
                   </p>
                   <div className="flex items-center gap-2 mt-2 flex-wrap">
                     <span className="inline-block px-2 py-1 text-xs rounded-full bg-primary/10 text-primary">
-                      {getCategoryName(task.category.title)}
+                      {task.category.title}
                     </span>
                     <span className="text-xs text-muted-foreground">
                       {formatDate(task.endAt)}

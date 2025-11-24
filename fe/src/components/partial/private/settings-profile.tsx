@@ -97,7 +97,7 @@ const SettingsProfilePartial: React.FC<SettingsProfilePartialProps> = ({
       </Card>
 
       <Dialog open={isEditing} onOpenChange={onEdit}>
-        <DialogContent className="w-full max-w-md">
+        <DialogContent className="w-full max-w-sm">
           <DialogHeader>
             <DialogTitle>Edit Profil</DialogTitle>
           </DialogHeader>

@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import SettingsProfilePartial from "@/components/partial/private/settings-profile";
 import SettingsSecurityPartial from "@/components/partial/private/settings-security";
+import SettingsAll from "@/components/partial/private/settingsAll";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -44,7 +45,6 @@ const SettingsHeroSection: React.FC<SettingsProps> = ({
           </p>
         </div>
 
-        {/* Profile Settings */}
         <SettingsProfilePartial
           userData={userData}
           isEditing={isEditingProfile}
@@ -53,10 +53,9 @@ const SettingsHeroSection: React.FC<SettingsProps> = ({
           isUpdating={isUpdatingProfile}
         />
 
-        {/* Security Settings */}
         <SettingsSecurityPartial />
+        <SettingsAll />
 
-        {/* Danger Zone */}
         <Card className="w-full border-destructive">
           <CardHeader>
             <CardTitle className="text-destructive">Zona Berbahaya</CardTitle>

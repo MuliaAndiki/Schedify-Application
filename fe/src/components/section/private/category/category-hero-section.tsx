@@ -41,7 +41,6 @@ const CategoryHeroSection: React.FC<CategoryHeroSectionProps> = ({
   return (
     <div className="w-full h-full overflow-x-hidden relative">
       <div className="w-full flex flex-col gap-6 p-4">
-        {/* Header */}
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-2xl font-bold">Kategori</h1>
@@ -55,7 +54,6 @@ const CategoryHeroSection: React.FC<CategoryHeroSectionProps> = ({
           </Button>
         </div>
 
-        {/* List */}
         <CategoryListPartial
           categories={categories}
           isLoading={isLoading}
@@ -65,7 +63,6 @@ const CategoryHeroSection: React.FC<CategoryHeroSectionProps> = ({
         />
       </div>
 
-      {/* Modal */}
       <CategoryModalPartial
         isOpen={isOpen}
         onClose={onCloseModal}

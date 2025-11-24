@@ -1,15 +1,18 @@
 "use client";
 
+import { Plus } from "lucide-react";
 import { useState } from "react";
-import { ITask, ICategory } from "@/types/schema";
-import { FormCreateTask } from "@/types/form/task.form";
+
+import TaskFilterPartial from "@/components/partial/private/task/task-filter";
 import TaskListPartial from "@/components/partial/private/task/task-list";
 import TaskModalPartial from "@/components/partial/private/task/task-modal";
-import TaskFilterPartial from "@/components/partial/private/task/task-filter";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { FormCreateTask } from "@/types/form/task.form";
+import { ICategory,ITask } from "@/types/schema";
+import { AlertContexType } from "@/types/ui";
 
 interface TaskHeroSectionProps {
+  alert: AlertContexType;
   tasks: ITask[];
   categories: ICategory[];
   isLoading: boolean;
@@ -30,6 +33,8 @@ interface TaskHeroSectionProps {
   setFilterStatus: React.Dispatch<
     React.SetStateAction<"all" | "done" | "pending">
   >;
+  onDeleteAll: () => void;
+  isPendingDeleteAll: boolean;
 }
 
 const TaskHeroSection: React.FC<TaskHeroSectionProps> = ({
@@ -51,6 +56,9 @@ const TaskHeroSection: React.FC<TaskHeroSectionProps> = ({
   onDone,
   filterStatus,
   setFilterStatus,
+  isPendingDeleteAll,
+  onDeleteAll,
+  alert,
 }) => {
   const filteredTasks = tasks.filter((task) => {
     const categoryMatch =
@@ -82,6 +90,9 @@ const TaskHeroSection: React.FC<TaskHeroSectionProps> = ({
           categories={categories}
           selectedCategoryId={selectedCategoryId}
           filterStatus={filterStatus}
+          deleteAllIspending={isPendingDeleteAll}
+          onDeleteAll={onDeleteAll}
+          alert={alert}
           onCategoryChange={onCategoryChange}
           setFilterStatus={setFilterStatus}
         />

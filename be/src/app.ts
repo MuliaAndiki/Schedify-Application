@@ -16,14 +16,7 @@ class App {
     this.app.get("/", () => "Hello Elysia! Bun js");
   }
   private middlewares() {
-    this.app.use(
-      cors({
-        origin: "*",
-        credentials: true,
-        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-        allowedHeaders: ["Content-Type", "Authorization"],
-      })
-    );
+    this.app.use(cors({ origin: "*" }));
     this.app.group("/api", (api) =>
       api.use(authRoutes).use(categoryRoutes).use(taskRoutes)
     );
