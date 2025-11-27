@@ -6,15 +6,44 @@ import { SidebarLayout } from "@/core/layouts/sidebar.layout";
 import useService from "@/hooks/service/props.service";
 import { useAppNameSpase } from "@/hooks/useNameSpace";
 import { FormUpdateProfile } from "@/types/form/auth.form";
+import { PopUpInterface } from "@/types/ui";
+import { fileToBase64 } from "@/utils/base64";
 
 const SettingsContainer = () => {
   const namespace = useAppNameSpase();
   const service = useService();
-  const [isEditingProfile, setIsEditingProfile] = useState(false);
 
   const logout = service.Auth.mutation.useLogout();
   const updateProfile = service.Auth.mutation.useUpdateProfile();
   const authData = service.Auth.query();
+  const [popUpModal, setPopUpModal] = useState<PopUpInterface>(null);
+  const [formUpdateProfile, setFormUpdateProfile] = useState<FormUpdateProfile>(
+    {
+      email: "",
+      fullName: "",
+      photoUrl: "",
+    }
+  );
+  const [preview, setPreview] = useState<string | null>(null);
+
+  const handleChangePitch = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const base64 = await fileToBase64(file);
+      setFormUpdateProfile((prev) => ({
+        ...prev,
+        photoUrl: base64,
+      }));
+      const url = URL.createObjectURL(file);
+      setPreview(url);
+      return () => URL.revokeObjectURL(url);
+    }
+  };
+
+  const handleOpenPopUp = (data: any) => {
+    setFormUpdateProfile(data);
+    setPopUpModal("edit-profile");
+  };
 
   const handleLogout = () => {
     return logout.mutate(
@@ -27,11 +56,10 @@ const SettingsContainer = () => {
     );
   };
 
-  const handleUpdateProfile = (payload: FormUpdateProfile) => {
-    updateProfile.mutate(payload, {
+  const handleUpdate = () => {
+    updateProfile.mutate(formUpdateProfile, {
       onSuccess: () => {
-        setIsEditingProfile(false);
-        authData.refetchAll();
+        setPopUpModal(null);
       },
     });
   };
@@ -42,11 +70,16 @@ const SettingsContainer = () => {
         <SettingsHeroSection
           userData={authData.profileQuery ?? ""}
           isPending={logout.isPending}
-          isEditingProfile={isEditingProfile}
-          onEditingProfile={setIsEditingProfile}
+          formUpdateProfile={formUpdateProfile}
+          setFormUpdateProfile={setFormUpdateProfile}
+          priview={preview}
           onLogout={() => handleLogout()}
-          onUpdateProfile={handleUpdateProfile}
-          isUpdatingProfile={updateProfile.isPending}
+          onUpdateProfile={handleUpdate}
+          onChangePitch={handleChangePitch}
+          popUpModal={popUpModal}
+          setPopUpModal={setPopUpModal}
+          setPriview={setPreview}
+          handleOpenPopUp={handleOpenPopUp}
         />
       </main>
     </SidebarLayout>

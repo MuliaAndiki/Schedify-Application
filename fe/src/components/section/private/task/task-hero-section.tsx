@@ -8,7 +8,7 @@ import TaskListPartial from "@/components/partial/private/task/task-list";
 import TaskModalPartial from "@/components/partial/private/task/task-modal";
 import { Button } from "@/components/ui/button";
 import { FormCreateTask } from "@/types/form/task.form";
-import { ICategory,ITask } from "@/types/schema";
+import { ICategory, ITask } from "@/types/schema";
 import { AlertContexType } from "@/types/ui";
 
 interface TaskHeroSectionProps {
@@ -62,7 +62,7 @@ const TaskHeroSection: React.FC<TaskHeroSectionProps> = ({
 }) => {
   const filteredTasks = tasks.filter((task) => {
     const categoryMatch =
-      selectedCategoryId === "all" || task.category.id === selectedCategoryId;
+      selectedCategoryId === "" || task.category.id === selectedCategoryId;
 
     let statusMatch = true;
     if (filterStatus === "done") statusMatch = task.isDone === true;

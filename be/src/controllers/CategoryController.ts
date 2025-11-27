@@ -1,10 +1,6 @@
 import { AppContext } from "@/contex/app-context";
 import { JwtPayload } from "@/types/auth.types";
-import {
-  JwtCategoryPayload,
-  PickCategoryID,
-  PickCreateCategory,
-} from "@/types/category.types";
+import { PickCategoryID, PickCreateCategory } from "@/types/category.types";
 import prisma from "prisma/client";
 
 class CategoryController {
@@ -169,6 +165,7 @@ class CategoryController {
   public async deleteCategory(c: AppContext) {
     try {
       const jwtUser = c.user as JwtPayload;
+
       if (!jwtUser) {
         return c.json?.(
           {
@@ -178,6 +175,14 @@ class CategoryController {
           404
         );
       }
+
+      await prisma.task.deleteMany({
+        where: {
+          category: {
+            userId: jwtUser.id,
+          },
+        },
+      });
       const category = await prisma.category.deleteMany({
         where: {
           userId: jwtUser.id,
@@ -197,7 +202,7 @@ class CategoryController {
       return c.json?.(
         {
           status: 200,
-          message: "succesfully delete all Category",
+          message: "succesfully delete all Category + Task",
           data: category,
         },
         200

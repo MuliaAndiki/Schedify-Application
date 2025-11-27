@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
@@ -26,9 +25,11 @@ const SettingsSecurityPartial: React.FC = () => {
               Ubah password Anda secara berkala
             </p>
           </div>
-          <Button variant="outline" size="sm">
-            Ubah Password
-          </Button>
+          <Link href={"/forgot-password"}>
+            <Button variant="outline" size="sm">
+              Ubah Password
+            </Button>
+          </Link>
         </div>
 
         <div className="border-t pt-4 flex justify-between items-center">

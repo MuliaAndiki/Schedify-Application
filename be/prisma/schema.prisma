@@ -22,6 +22,7 @@ model User {
   isVerify   Boolean?   @default(false)
   categories Category[]
   tasks      Task[]
+  reminded Reminder[]
 
   @@map("User")
 }
@@ -60,8 +61,11 @@ model Reminder {
   taskId    String   @unique
   reminded  DateTime
   createdAt DateTime @default(now())
+  userID String
   updatedAt DateTime @updatedAt
   task      Task     @relation(fields: [taskId], references: [id])
+  user User @relation(fields: [userID], references: [id])
+
 
   @@map("Reminder")
 }

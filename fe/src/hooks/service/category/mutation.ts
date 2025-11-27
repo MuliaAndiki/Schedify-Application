@@ -30,7 +30,7 @@ const CategoryMutation = {
       },
     });
   },
-  useDelete() {
+  useDeleteAll() {
     const namespace = useAppNameSpase();
     return useMutation<TResponse<any>, Error, any>({
       mutationFn: () => Api.Category.delete(),

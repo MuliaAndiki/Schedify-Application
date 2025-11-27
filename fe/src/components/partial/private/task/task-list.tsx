@@ -2,7 +2,7 @@
 
 import { format } from "date-fns";
 import { id as idLocale } from "date-fns/locale";
-import { Calendar,Edit2, Trash2 } from "lucide-react";
+import { Calendar, Edit2, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ICategory,ITask } from "@/types/schema";
+import { ITask } from "@/types/schema";
 
 interface TaskListPartialProps {
   tasks: ITask[];

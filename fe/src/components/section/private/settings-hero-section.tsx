@@ -1,39 +1,39 @@
-"use client";
-
-import { useState } from "react";
-
-import SettingsProfilePartial from "@/components/partial/private/settings-profile";
-import SettingsSecurityPartial from "@/components/partial/private/settings-security";
+import SettingsLogout from "@/components/partial/private/settings/setting-logout";
+import SettingsProfilePartial from "@/components/partial/private/settings/settings-profile";
+import SettingsSecurityPartial from "@/components/partial/private/settings/settings-security";
 import SettingsAll from "@/components/partial/private/settingsAll";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { FormUpdateProfile } from "@/types/form/auth.form";
 import { IAuth } from "@/types/schema";
+import { PopUpInterface } from "@/types/ui";
 
 interface SettingsProps {
   userData: IAuth;
   onLogout: () => void;
   isPending: boolean;
-  isEditingProfile: boolean;
-  onEditingProfile: (editing: boolean) => void;
-  onUpdateProfile: (payload: FormUpdateProfile) => void;
-  isUpdatingProfile: boolean;
+  setPopUpModal: React.Dispatch<React.SetStateAction<PopUpInterface>>;
+  onUpdateProfile: () => void;
+  onChangePitch: (e: any) => void;
+  formUpdateProfile: FormUpdateProfile;
+  setFormUpdateProfile: React.Dispatch<React.SetStateAction<FormUpdateProfile>>;
+  priview: string | null;
+  setPriview: React.Dispatch<React.SetStateAction<string | null>>;
+  popUpModal: PopUpInterface;
+  handleOpenPopUp: (data: any) => void;
 }
 
 const SettingsHeroSection: React.FC<SettingsProps> = ({
   userData,
   onLogout,
   isPending,
-  isEditingProfile,
-  onEditingProfile,
   onUpdateProfile,
-  isUpdatingProfile,
+  onChangePitch,
+  formUpdateProfile,
+  setFormUpdateProfile,
+  setPopUpModal,
+  priview,
+  popUpModal,
+  setPriview,
+  handleOpenPopUp,
 }) => {
   return (
     <view className="w-full h-full overflow-x-hidden relative">
@@ -46,35 +46,23 @@ const SettingsHeroSection: React.FC<SettingsProps> = ({
         </div>
 
         <SettingsProfilePartial
+          handlePopUp={handleOpenPopUp}
           userData={userData}
-          isEditing={isEditingProfile}
-          onEdit={onEditingProfile}
+          formUpdateProfile={formUpdateProfile}
+          setFormUpdateProfile={setFormUpdateProfile}
+          preview={priview}
+          onChangePitch={onChangePitch}
+          setPopUpModal={setPopUpModal}
+          setPreview={setPriview}
+          popUpModal={popUpModal}
           onUpdate={onUpdateProfile}
-          isUpdating={isUpdatingProfile}
+          isPending={isPending}
         />
 
         <SettingsSecurityPartial />
         <SettingsAll />
 
-        <Card className="w-full border-destructive">
-          <CardHeader>
-            <CardTitle className="text-destructive">Zona Berbahaya</CardTitle>
-            <CardDescription>
-              Tindakan yang tidak dapat diurungkan
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Button
-              className="w-full"
-              disabled={isPending}
-              type="button"
-              variant="destructive"
-              onClick={() => onLogout()}
-            >
-              {isPending ? "Tunggu..." : "Logout"}
-            </Button>
-          </CardContent>
-        </Card>
+        <SettingsLogout isPending={isPending} onLogout={onLogout} />
       </div>
     </view>
   );

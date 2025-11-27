@@ -1,13 +1,12 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
 import CategoryHeroSection from "@/components/section/private/category/category-hero-section";
 import { SidebarLayout } from "@/core/layouts/sidebar.layout";
 import useService from "@/hooks/service/props.service";
 import { useAppNameSpase } from "@/hooks/useNameSpace";
 import { FormCreateCategory } from "@/types/form/category.form";
-import { PickCategoryID } from "@/types/form/category.form";
 
 const CategoryContainer = () => {
   const namespace = useAppNameSpase();
@@ -19,6 +18,7 @@ const CategoryContainer = () => {
   const createMutation = service.Category.mutation.useCreate();
   const updateMutation = service.Category.mutation.useUpdate();
   const deleteMutation = service.Category.mutation.useDeleteById();
+  const deleteMutattionAll = service.Category.mutation.useDeleteAll();
 
   const handleCreate = (payload: FormCreateCategory) => {
     if (!payload.title || !payload.description) {
@@ -54,6 +54,10 @@ const CategoryContainer = () => {
     );
   };
 
+  const handleDeleteAll = () => {
+    return deleteMutattionAll.mutate({});
+  };
+
   const handleDelete = (id: string) => {
     deleteMutation.mutate(id);
   };
@@ -77,6 +81,8 @@ const CategoryContainer = () => {
           categories={categoryQuery.CategoryQuery}
           isLoading={categoryQuery.isLoading}
           isOpen={isOpen}
+          onDeleteAll={handleDeleteAll}
+          alert={namespace.alert}
           editingId={editingId}
           onOpenModal={handleOpenModal}
           onCloseModal={handleCloseModal}
@@ -85,6 +91,7 @@ const CategoryContainer = () => {
           onDelete={handleDelete}
           isPendingCreate={createMutation.isPending}
           isPendingUpdate={updateMutation.isPending}
+          isPendingDeleteAll={deleteMutattionAll.isPending}
           isPendingDelete={deleteMutation.isPending}
         />
       </main>

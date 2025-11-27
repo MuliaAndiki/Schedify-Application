@@ -23,7 +23,7 @@ const TaskContainer = () => {
   const doneMutation = service.Task.mutation.useDoneTask();
   const deleteAllMutation = service.Task.mutation.useDelete();
   const [filterStatus, setFilterStatus] = useState<"all" | "done" | "pending">(
-    "all"
+    "pending"
   );
 
   const handleCreate = (payload: FormCreateTask) => {

@@ -1,15 +1,14 @@
-"use client";
-
 import { Plus } from "lucide-react";
-import { useState } from "react";
 
 import CategoryListPartial from "@/components/partial/private/category/category-list";
 import CategoryModalPartial from "@/components/partial/private/category/category-modal";
 import { Button } from "@/components/ui/button";
 import { FormCreateCategory } from "@/types/form/category.form";
 import { ICategory } from "@/types/schema";
+import { AlertContexType } from "@/types/ui";
 
 interface CategoryHeroSectionProps {
+  alert: AlertContexType;
   categories: ICategory[];
   isLoading: boolean;
   isOpen: boolean;
@@ -19,9 +18,11 @@ interface CategoryHeroSectionProps {
   onCreate: (payload: FormCreateCategory) => void;
   onUpdate: (payload: FormCreateCategory) => void;
   onDelete: (id: string) => void;
+  onDeleteAll: () => void;
   isPendingCreate: boolean;
   isPendingUpdate: boolean;
   isPendingDelete: boolean;
+  isPendingDeleteAll: boolean;
 }
 
 const CategoryHeroSection: React.FC<CategoryHeroSectionProps> = ({
@@ -37,6 +38,9 @@ const CategoryHeroSection: React.FC<CategoryHeroSectionProps> = ({
   isPendingCreate,
   isPendingUpdate,
   isPendingDelete,
+  onDeleteAll,
+  isPendingDeleteAll,
+  alert,
 }) => {
   return (
     <div className="w-full h-full overflow-x-hidden relative">
@@ -52,6 +56,28 @@ const CategoryHeroSection: React.FC<CategoryHeroSectionProps> = ({
             <Plus className="w-4 h-4" />
             Tambah
           </Button>
+        </div>
+        <div className="w-full ">
+          {categories && categories.length > 0 && (
+            <Button
+              className="w-full"
+              variant={"destructive"}
+              onClick={() =>
+                alert.confirm({
+                  title: "Perhatian",
+                  deskripsi: "Apakah Kamu Mau Menghapus Semua Task & Category",
+                  icon: "warning",
+                  onConfirm: () => {
+                    onDeleteAll();
+                  },
+                  onClose: () => {},
+                })
+              }
+              disabled={isPendingDeleteAll}
+            >
+              {isPendingDeleteAll ? "bentar" : "Hapus Semua"}
+            </Button>
+          )}
         </div>
 
         <CategoryListPartial
