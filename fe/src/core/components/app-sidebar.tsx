@@ -42,7 +42,7 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>My Classes</SidebarGroupLabel>
+          <SidebarGroupLabel>Schedify</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {dashboardRoutes.map((item) => {

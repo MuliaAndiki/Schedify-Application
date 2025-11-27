@@ -2,7 +2,7 @@
 
 import { format } from "date-fns";
 import { id as idLocale } from "date-fns/locale";
-import { Calendar,Edit2, Trash2 } from "lucide-react";
+import { Calendar, Edit2, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -14,11 +14,10 @@ import {
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ICategory,ITask } from "@/types/schema";
+import { ITask } from "@/types/schema";
 
 interface TaskListPartialProps {
   tasks: ITask[];
-  categories: ICategory[];
   isLoading: boolean;
   onEdit: (id: string) => void;
   onDelete: (id: string) => void;
@@ -33,7 +32,6 @@ const TaskListPartial: React.FC<TaskListPartialProps> = ({
   onDelete,
   isPendingDelete,
   onDone,
-  categories,
 }) => {
   const formatDate = (date: string) => {
     try {
@@ -85,10 +83,9 @@ const TaskListPartial: React.FC<TaskListPartialProps> = ({
             <div className="flex justify-between items-start gap-4">
               <div className="flex gap-3 flex-1">
                 <Checkbox
-                  checked={task.isDone}
                   onClick={() => onDone(task.id)}
+                  checked={task.isDone}
                   className="mt-1"
-                  disabled
                 />
                 <div className="flex-1">
                   <CardTitle

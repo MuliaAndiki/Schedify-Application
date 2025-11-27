@@ -1,8 +1,7 @@
 import { AppContext } from "@/contex/app-context";
 import { JwtPayload } from "@/types/auth.types";
 import { PickCategoryID } from "@/types/category.types";
-import { PickCreateTask, PickIsDone, PickTaskID } from "@/types/task.types";
-import { status } from "elysia";
+import { PickCreateTask, PickTaskID } from "@/types/task.types";
 import prisma from "prisma/client";
 
 class TaskController {

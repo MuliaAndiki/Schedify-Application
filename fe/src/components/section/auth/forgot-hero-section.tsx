@@ -29,7 +29,7 @@ const ForgotHeroSection: React.FC<ForgotProps> = ({
       <div className="flex flex-col gap-6">
         <Card>
           <CardHeader className="text-center">
-            <CardTitle className="text-xl">Reset Password</CardTitle>
+            <CardTitle className="text-xl">Verify Email</CardTitle>
           </CardHeader>
           <CardContent>
             <form

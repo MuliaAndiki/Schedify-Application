@@ -7,3 +7,4 @@ export interface IReminder {
 }
 
 export type PickReminderID = Pick<IReminder, "id">;
+export type PIckCreateReminder = Pick<IReminder, "reminded" | "taskID">;

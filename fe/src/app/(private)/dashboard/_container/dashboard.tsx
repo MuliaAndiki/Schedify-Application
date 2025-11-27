@@ -10,11 +10,25 @@ const DashboardContainer = () => {
   const authDataAll = service.Auth.query();
   const categoryQuery = service.Category.query();
   const taskQuery = service.Task.query();
+  const doneMutation = service.Task.mutation.useDoneTask();
+
+  const handleDoneTask = (id?: string) => {
+    if (!id) {
+      namespace.alert.toast({
+        title: "perhatian",
+        message: "id tidak valid",
+        icon: "warning",
+      });
+    } else {
+      doneMutation.mutate(id);
+    }
+  };
 
   return (
     <SidebarLayout>
       <main className="w-full min-h-screen flex flex-col ">
         <DashboardHeroSection
+          onDone={handleDoneTask}
           userData={authDataAll.profileQuery ?? ""}
           categories={categoryQuery.CategoryQuery}
           tasks={taskQuery.TaskQuery}

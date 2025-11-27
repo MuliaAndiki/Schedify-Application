@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { FormCreateTask } from "@/types/form/task.form";
-import { ICategory,ITask } from "@/types/schema";
+import { ICategory, ITask } from "@/types/schema";
 
 interface TaskModalPartialProps {
   isOpen: boolean;
@@ -62,7 +62,6 @@ const TaskModalPartial: React.FC<TaskModalPartialProps> = ({
       if (task) {
         setForm({
           todo: task.todo,
-
           endAt: task.createdAt,
         });
       }
@@ -85,7 +84,7 @@ const TaskModalPartial: React.FC<TaskModalPartialProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-full max-w-md ">
+      <DialogContent className="w-full max-w-sm ">
         <DialogHeader>
           <DialogTitle>
             {editingId ? "Edit Tugas" : "Tambah Tugas Baru"}

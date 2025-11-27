@@ -118,11 +118,6 @@ const TaskMutation = {
         namespace.queryClient.invalidateQueries({
           predicate: (query) => query.queryKey[0] === "task",
         });
-        namespace.alert.toast({
-          title: "succesfully",
-          message: "succesfully done task",
-          icon: "success",
-        });
       },
       onError: (err) => {
         console.error(err);

@@ -8,9 +8,11 @@ import TaskListPartial from "@/components/partial/private/task/task-list";
 import TaskModalPartial from "@/components/partial/private/task/task-modal";
 import { Button } from "@/components/ui/button";
 import { FormCreateTask } from "@/types/form/task.form";
-import { ICategory,ITask } from "@/types/schema";
+import { ICategory, ITask } from "@/types/schema";
+import { AlertContexType } from "@/types/ui";
 
 interface TaskHeroSectionProps {
+  alert: AlertContexType;
   tasks: ITask[];
   categories: ICategory[];
   isLoading: boolean;
@@ -27,6 +29,12 @@ interface TaskHeroSectionProps {
   isPendingUpdate: boolean;
   isPendingDelete: boolean;
   onDone: (id: string) => void;
+  filterStatus: "all" | "done" | "pending";
+  setFilterStatus: React.Dispatch<
+    React.SetStateAction<"all" | "done" | "pending">
+  >;
+  onDeleteAll: () => void;
+  isPendingDeleteAll: boolean;
 }
 
 const TaskHeroSection: React.FC<TaskHeroSectionProps> = ({
@@ -46,17 +54,22 @@ const TaskHeroSection: React.FC<TaskHeroSectionProps> = ({
   isPendingUpdate,
   isPendingDelete,
   onDone,
+  filterStatus,
+  setFilterStatus,
+  isPendingDeleteAll,
+  onDeleteAll,
+  alert,
 }) => {
-  const [filterStatus, setFilterStatus] = useState<"all" | "done">("all");
-
   const filteredTasks = tasks.filter((task) => {
-    if (selectedCategoryId && task.categoryID !== selectedCategoryId)
-      return false;
-    if (filterStatus === "done") return task.isDone;
+    const categoryMatch =
+      selectedCategoryId === "" || task.category.id === selectedCategoryId;
 
-    return true;
+    let statusMatch = true;
+    if (filterStatus === "done") statusMatch = task.isDone === true;
+    if (filterStatus === "pending") statusMatch = task.isDone === false;
+
+    return categoryMatch && statusMatch;
   });
-
   return (
     <div className="w-full h-full overflow-x-hidden relative">
       <div className="w-full flex flex-col gap-6 p-4">
@@ -77,18 +90,20 @@ const TaskHeroSection: React.FC<TaskHeroSectionProps> = ({
           categories={categories}
           selectedCategoryId={selectedCategoryId}
           filterStatus={filterStatus}
+          deleteAllIspending={isPendingDeleteAll}
+          onDeleteAll={onDeleteAll}
+          alert={alert}
           onCategoryChange={onCategoryChange}
-          onFilterChange={setFilterStatus}
+          setFilterStatus={setFilterStatus}
         />
 
         <TaskListPartial
           tasks={filteredTasks}
-          categories={categories}
+          onDone={onDone}
           isLoading={isLoading}
           onEdit={onOpenModal}
           onDelete={onDelete}
           isPendingDelete={isPendingDelete}
-          onDone={onDone}
         />
       </div>
 
