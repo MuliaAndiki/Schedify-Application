@@ -22,6 +22,7 @@ const TaskContainer = () => {
   const deleteMutation = service.Task.mutation.useDeleteByID();
   const doneMutation = service.Task.mutation.useDoneTask();
   const deleteAllMutation = service.Task.mutation.useDelete();
+  const remindedQuery = service.reminded.query();
   const [filterStatus, setFilterStatus] = useState<"all" | "done" | "pending">(
     "pending"
   );
@@ -99,6 +100,7 @@ const TaskContainer = () => {
       <main className="w-full min-h-screen flex flex-col">
         <TaskHeroSection
           tasks={taskQuery.TaskQuery}
+          remindedData={remindedQuery.useRemindedQuery ?? []}
           filterStatus={filterStatus}
           setFilterStatus={setFilterStatus}
           categories={categoryQuery.CategoryQuery}

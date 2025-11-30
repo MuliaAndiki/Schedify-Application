@@ -39,6 +39,20 @@ class RemindedRoutes {
         beforeHandle: [verifyToken().beforeHandle],
       }
     );
+    this.remindedRoutes.delete(
+      "/",
+      (c: AppContext) => RemidedController.deleteReminder(c),
+      {
+        beforeHandle: [verifyToken().beforeHandle],
+      }
+    );
+    this.remindedRoutes.get(
+      "/",
+      (c: AppContext) => RemidedController.getReminded(c),
+      {
+        beforeHandle: [verifyToken().beforeHandle],
+      }
+    );
   }
 }
 

@@ -72,6 +72,27 @@ const RemindedMutation = {
       },
     });
   },
+  useDeleteAll() {
+    const namespace = useAppNameSpase();
+    return useMutation<TResponse<any>, Error, any>({
+      mutationFn: () => Api.Reminded.delete(),
+      onSuccess: () => {
+        namespace.alert.toast({
+          title: "succesfully",
+          message: "succesfully delete all reminded",
+          icon: "success",
+        });
+      },
+      onError: (err) => {
+        console.error(err);
+        namespace.alert.toast({
+          title: "failed",
+          message: "failed delete all reminded",
+          icon: "error",
+        });
+      },
+    });
+  },
 };
 
 export default RemindedMutation;

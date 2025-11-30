@@ -3,6 +3,7 @@
 import { format } from "date-fns";
 import { id as idLocale } from "date-fns/locale";
 import { Calendar, Edit2, Trash2 } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -14,15 +15,19 @@ import {
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ITask } from "@/types/schema";
+import { IReminder, ITask } from "@/types/schema";
+import { getDate } from "@/utils/string.format";
 
 interface TaskListPartialProps {
   tasks: ITask[];
+  remindedData?: IReminder[];
   isLoading: boolean;
-  onEdit: (id: string) => void;
-  onDelete: (id: string) => void;
-  isPendingDelete: boolean;
-  onDone: (id: string) => void;
+  onEdit?: (id: string) => void;
+  onDelete?: (id: string) => void;
+  isPendingDelete?: boolean;
+  onDone?: (id: string) => void;
+  setSelectID?: React.Dispatch<React.SetStateAction<string | null>>;
+  selectID?: string | null;
 }
 
 const TaskListPartial: React.FC<TaskListPartialProps> = ({
@@ -31,7 +36,10 @@ const TaskListPartial: React.FC<TaskListPartialProps> = ({
   onEdit,
   onDelete,
   isPendingDelete,
+  setSelectID,
+  selectID,
   onDone,
+  remindedData,
 }) => {
   const formatDate = (date: string) => {
     try {
@@ -40,6 +48,8 @@ const TaskListPartial: React.FC<TaskListPartialProps> = ({
       return date;
     }
   };
+  const pathname = usePathname();
+  const hiddenFile = ["/notify"];
 
   if (isLoading) {
     return (
@@ -75,15 +85,16 @@ const TaskListPartial: React.FC<TaskListPartialProps> = ({
       {tasks.map((task) => (
         <Card
           key={task.id}
-          className={`hover:shadow-md transition-all ${
+          className={`hover:shadow-md transition-all ${selectID ? "border-blue-700" : "border"} ${
             task.isDone ? "opacity-60" : ""
           }`}
+          onClick={() => setSelectID!(task.id)}
         >
           <CardHeader>
-            <div className="flex justify-between items-start gap-4">
+            <div className={`flex justify-between items-start gap-4 `}>
               <div className="flex gap-3 flex-1">
                 <Checkbox
-                  onClick={() => onDone(task.id)}
+                  onClick={() => onDone!(task.id)}
                   checked={task.isDone}
                   className="mt-1"
                 />
@@ -104,24 +115,35 @@ const TaskListPartial: React.FC<TaskListPartialProps> = ({
                       {formatDate(task.endAt)}
                     </span>
                   </CardDescription>
+                  {remindedData?.map((items) => (
+                    <div key={items.id} className="">
+                      <h1 className="font-medium">
+                        Reminded:{getDate(items.reminded)}
+                      </h1>
+                    </div>
+                  ))}
                 </div>
               </div>
               <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => onEdit(task.id)}
-                >
-                  <Edit2 className="w-4 h-4" />
-                </Button>
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  onClick={() => onDelete(task.id)}
-                  disabled={isPendingDelete}
-                >
-                  <Trash2 className="w-4 h-4" />
-                </Button>
+                {!hiddenFile.includes(pathname) ? (
+                  <>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => onEdit!(task.id)}
+                    >
+                      <Edit2 className="w-4 h-4" />
+                    </Button>
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      onClick={() => onDelete!(task.id)}
+                      disabled={isPendingDelete}
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </>
+                ) : null}
               </div>
             </div>
           </CardHeader>

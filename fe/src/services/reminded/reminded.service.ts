@@ -18,6 +18,14 @@ class RemindedApi {
     const res = await AxiosClient.put(`/api/reminded/${id}`, payload);
     return res.data;
   }
+  async delete(): Promise<TResponse<any>> {
+    const res = await AxiosClient.delete("/api/reminded/");
+    return res.data;
+  }
+  async get(): Promise<TResponse<any>> {
+    const res = await AxiosClient.get("/api/reminded/");
+    return res.data;
+  }
 }
 
 export default RemindedApi;

@@ -1,12 +1,13 @@
-import { Bell } from 'lucide-react';
+import { Bell } from "lucide-react";
+import Link from "next/link";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from "@/components/ui/dropdown-menu";
 
 export default function NotificationDropdown() {
   return (
@@ -18,7 +19,9 @@ export default function NotificationDropdown() {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem>
-          <span>Notification</span>
+          <Link href={"/notify"}>
+            <span>Notification</span>
+          </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
