@@ -7,18 +7,21 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ITask } from "@/types/schema";
+import { IReminder, ITask } from "@/types/schema";
+import { getDate } from "@/utils/string.format";
 
 interface DashboardTaskPartialProps {
   tasks: ITask[];
   isLoading: boolean;
   onDone: (id: string) => void;
+  remended: IReminder[];
 }
 
 const DashboardTaskPartial: React.FC<DashboardTaskPartialProps> = ({
   tasks,
   isLoading,
   onDone,
+  remended,
 }) => {
   const formatDate = (date: string) => {
     try {
@@ -93,6 +96,13 @@ const DashboardTaskPartial: React.FC<DashboardTaskPartialProps> = ({
                   </div>
                 </div>
               </div>
+              {remended.map((items) => (
+                <div key={items.id}>
+                  <h1 className="font-medium">
+                    Remend: {getDate(items.reminded)}
+                  </h1>
+                </div>
+              ))}
             </CardContent>
           </Card>
         ))}

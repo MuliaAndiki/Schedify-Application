@@ -11,6 +11,7 @@ const DashboardContainer = () => {
   const categoryQuery = service.Category.query();
   const taskQuery = service.Task.query();
   const doneMutation = service.Task.mutation.useDoneTask();
+  const remindedQuery = service.reminded.query();
 
   const handleDoneTask = (id?: string) => {
     if (!id) {
@@ -29,6 +30,7 @@ const DashboardContainer = () => {
       <main className="w-full min-h-screen flex flex-col ">
         <DashboardHeroSection
           onDone={handleDoneTask}
+          reminded={remindedQuery.useRemindedQuery ?? []}
           userData={authDataAll.profileQuery ?? ""}
           categories={categoryQuery.CategoryQuery}
           tasks={taskQuery.TaskQuery}

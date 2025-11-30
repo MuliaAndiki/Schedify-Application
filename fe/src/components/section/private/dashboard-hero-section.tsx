@@ -1,7 +1,7 @@
 import DashboardCategoryPartial from "@/components/partial/private/dashboard-category";
 import DashboardTaskPartial from "@/components/partial/private/dashboard-task";
 import HeaderDashboardPartial from "@/components/partial/private/header-dashboard";
-import { IAuth, ICategory, ITask } from "@/types/schema";
+import { IAuth, ICategory, IReminder, ITask } from "@/types/schema";
 
 interface DashboardProps {
   userData: IAuth;
@@ -9,6 +9,7 @@ interface DashboardProps {
   tasks: ITask[];
   isLoading: boolean;
   onDone: (id: string) => void;
+  reminded: IReminder[];
 }
 
 const DashboardHeroSection: React.FC<DashboardProps> = ({
@@ -16,6 +17,7 @@ const DashboardHeroSection: React.FC<DashboardProps> = ({
   categories,
   tasks,
   isLoading,
+  reminded,
   onDone,
 }) => {
   const recentTasks = tasks.slice(0, 3);
@@ -46,6 +48,7 @@ const DashboardHeroSection: React.FC<DashboardProps> = ({
         />
 
         <DashboardTaskPartial
+          remended={reminded ?? []}
           tasks={recentTasks}
           onDone={onDone}
           isLoading={isLoading}

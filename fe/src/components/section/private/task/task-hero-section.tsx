@@ -8,7 +8,7 @@ import TaskListPartial from "@/components/partial/private/task/task-list";
 import TaskModalPartial from "@/components/partial/private/task/task-modal";
 import { Button } from "@/components/ui/button";
 import { FormCreateTask } from "@/types/form/task.form";
-import { ICategory, ITask } from "@/types/schema";
+import { ICategory, IReminder, ITask } from "@/types/schema";
 import { AlertContexType } from "@/types/ui";
 
 interface TaskHeroSectionProps {
@@ -35,6 +35,7 @@ interface TaskHeroSectionProps {
   >;
   onDeleteAll: () => void;
   isPendingDeleteAll: boolean;
+  remindedData: IReminder[];
 }
 
 const TaskHeroSection: React.FC<TaskHeroSectionProps> = ({
@@ -59,6 +60,7 @@ const TaskHeroSection: React.FC<TaskHeroSectionProps> = ({
   isPendingDeleteAll,
   onDeleteAll,
   alert,
+  remindedData,
 }) => {
   const filteredTasks = tasks.filter((task) => {
     const categoryMatch =
@@ -100,6 +102,7 @@ const TaskHeroSection: React.FC<TaskHeroSectionProps> = ({
         <TaskListPartial
           tasks={filteredTasks}
           onDone={onDone}
+          remindedData={remindedData ?? []}
           isLoading={isLoading}
           onEdit={onOpenModal}
           onDelete={onDelete}

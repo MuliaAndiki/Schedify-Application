@@ -22,7 +22,7 @@ export interface AlertContexType {
   confirm: (p: ModalProps) => Promise<boolean>;
 }
 
-export type PopUpInterface = "edit-profile" | null;
+export type PopUpInterface = "edit-profile" | "reminded" | null;
 
 export interface PopUpProps {
   isOpen: boolean;

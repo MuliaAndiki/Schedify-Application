@@ -495,9 +495,7 @@ class AuthController {
           id: jwtUser.id,
         },
         data: {
-          fullName: user.fullName,
-          email: user.email,
-          photoUrl: documentUrl.photoUrl,
+          ...user,
         },
       });
       return c.json?.({

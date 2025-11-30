@@ -1,7 +1,6 @@
 import { AppContext } from "@/contex/app-context";
 import { JwtPayload } from "@/types/auth.types";
 import { PIckCreateReminder, PickReminderID } from "@/types/reminder.type";
-import { PickTaskID } from "@/types/task.types";
 import prisma from "prisma/client";
 
 class RemindedController {
@@ -31,6 +30,7 @@ class RemindedController {
       const task = await prisma.task.findUnique({
         where: {
           id: remind.taskID,
+          userId: jwtUser.id,
         },
       });
 
@@ -55,15 +55,19 @@ class RemindedController {
       }
       const reminded = await prisma.reminder.create({
         data: {
-          reminded: newReminder,
+          reminded: remind.reminded,
           taskId: remind.taskID,
+          userID: jwtUser.id,
         },
       });
-      return c.json?.({
-        status: 201,
-        message: "reminded is create",
-        data: reminded,
-      });
+      return c.json?.(
+        {
+          status: 201,
+          message: "reminded is create",
+          data: reminded,
+        },
+        201
+      );
     } catch (error) {
       console.error(error);
       return c.json?.(
@@ -76,30 +80,54 @@ class RemindedController {
       );
     }
   }
-  //   public async deleteReminder(c:AppContext){
-  //     try {
-  //         const jwtUser = c.user as JwtPayload
-  //         if(!jwtUser){
-  //             return c.json?.({
-  //                 status:404,
-  //                 message:"user not found"
+  public async deleteReminder(c: AppContext) {
+    try {
+      const jwtUser = c.user as JwtPayload;
+      if (!jwtUser) {
+        return c.json?.(
+          {
+            status: 404,
+            message: "user not found",
+          },
+          404
+        );
+      }
+      const reminded = await prisma.reminder.deleteMany({
+        where: {
+          userID: jwtUser.id,
+        },
+      });
 
-  //             },404)
-  //         }
-  //         const reminded = await prisma.reminder.deleteMany({
-  //             where:{
-
-  //             }
-  //         })
-  //     } catch (error) {
-  //         console.error(error)
-  //         return c.json?.({
-  //             status:500,
-  //             message:"server internal error",
-  //             error:error instanceof Error?error.message: error
-  //         },500)
-  //     }
-  //   }
+      if (!reminded) {
+        return c.json?.(
+          {
+            status: 400,
+            message: "server internal error",
+          },
+          400
+        );
+      } else {
+        return c.json?.(
+          {
+            status: 200,
+            message: "succesfully delete all reminder",
+            data: reminded,
+          },
+          200
+        );
+      }
+    } catch (error) {
+      console.error(error);
+      return c.json?.(
+        {
+          status: 500,
+          message: "server internal error",
+          error: error instanceof Error ? error.message : error,
+        },
+        500
+      );
+    }
+  }
   public async deleteRemindedById(c: AppContext) {
     try {
       const jwtUser = c.user as JwtPayload;
@@ -125,6 +153,7 @@ class RemindedController {
       const reminded = await prisma.reminder.delete({
         where: {
           id: remen.id,
+          userID: jwtUser.id,
         },
       });
       if (!reminded) {
@@ -171,7 +200,7 @@ class RemindedController {
           404
         );
       }
-      if (!remenBody.reminded || !remenBody.taskID) {
+      if (!remenBody.reminded) {
         return c.json?.(
           {
             status: 400,
@@ -204,10 +233,57 @@ class RemindedController {
           400
         );
       } else {
+        return c.json?.(
+          {
+            status: 200,
+            message: "succesfully update reminded",
+            data: remended,
+          },
+          200
+        );
+      }
+    } catch (error) {
+      console.error(error);
+      return c.json?.(
+        {
+          status: 500,
+          message: "server internal error",
+          error: error instanceof Error ? error.message : error,
+        },
+        500
+      );
+    }
+  }
+  public async getReminded(c: AppContext) {
+    try {
+      const jwtUser = c.user as JwtPayload;
+      if (!jwtUser) {
+        return c.json?.(
+          {
+            status: 404,
+            message: "user not found",
+          },
+          400
+        );
+      }
+      const reminded = await prisma.reminder.findMany({
+        where: {
+          userID: jwtUser.id,
+        },
+      });
+      if (!reminded) {
+        return c.json?.(
+          {
+            status: 400,
+            message: "server internal error",
+          },
+          400
+        );
+      } else {
         return c.json?.({
           status: 200,
-          message: "succesfully update reminded",
-          data: remended,
+          message: "succesfully get reminded",
+          data: reminded,
         });
       }
     } catch (error) {
@@ -221,35 +297,7 @@ class RemindedController {
         500
       );
     }
-    // setup
   }
-  //   public async getReminded(c:AppContext){
-  //     try {
-  //         const jwtUser = c.user as JwtPayload
-  //         if(!jwtUser){
-  //             return c.json?.({
-  //                 status:404,
-  //                 message:"user not found"
-
-  //             },400)
-  //         }
-  //         const reminded = await prisma.reminder.findUnique({
-  //             where:{
-  //                 use
-  //             }
-  //         })
-  //     } catch (error) {
-  //          console.error(error);
-  //       return c.json?.(
-  //         {
-  //           status: 500,
-  //           message: "server internal error",
-  //           error: error instanceof Error ? error.message : error,
-  //         },
-  //         500
-  //       );
-  //     }
-  //   }
 }
 
 export default new RemindedController();
