@@ -110,10 +110,6 @@ Beberapa aturan validasi utama:
 | ---------------- | ------------- |
 | **Mulia Andiki** | 2308107010013 |
 
-Universitas Syiah Kuala  
-Fakultas Matematika dan Ilmu Pengetahuan Alam  
-Program Studi Informatika  
-:contentReference[oaicite:7]{index=7}
 
 ---
 
