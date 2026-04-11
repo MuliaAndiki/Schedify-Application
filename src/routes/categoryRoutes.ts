@@ -1,5 +1,6 @@
 import { AppContext } from "@/contex/app-context";
 import CategoryController from "@/controllers/CategoryController";
+import { verifyToken } from "@/middlewares/auth";
 import Elysia from "elysia";
 
 class CategoryRoutes {
@@ -18,23 +19,47 @@ class CategoryRoutes {
   }
 
   private routes() {
-    this.categoryRoutes.post("/", (c: AppContext) =>
-      CategoryController.createCategory(c),
+    this.categoryRoutes.post(
+      "/",
+      (c: AppContext) => CategoryController.createCategory(c),
+      {
+        beforeHandle: [verifyToken().beforeHandle],
+      },
     );
-    this.categoryRoutes.get("/", (c: AppContext) =>
-      CategoryController.getCategory(c),
+    this.categoryRoutes.get(
+      "/",
+      (c: AppContext) => CategoryController.getCategory(c),
+      {
+        beforeHandle: [verifyToken().beforeHandle],
+      },
     );
-    this.categoryRoutes.get("/:id", (c: AppContext) =>
-      CategoryController.getCategoryById(c),
+    this.categoryRoutes.get(
+      "/:id",
+      (c: AppContext) => CategoryController.getCategoryById(c),
+      {
+        beforeHandle: [verifyToken().beforeHandle],
+      },
     );
-    this.categoryRoutes.delete("/", (c: AppContext) =>
-      CategoryController.deleteCategory(c),
+    this.categoryRoutes.delete(
+      "/",
+      (c: AppContext) => CategoryController.deleteCategory(c),
+      {
+        beforeHandle: [verifyToken().beforeHandle],
+      },
     );
-    this.categoryRoutes.delete("/:id", (c: AppContext) =>
-      CategoryController.deleteCategoryById(c),
+    this.categoryRoutes.delete(
+      "/:id",
+      (c: AppContext) => CategoryController.deleteCategoryById(c),
+      {
+        beforeHandle: [verifyToken().beforeHandle],
+      },
     );
-    this.categoryRoutes.put("/:id", (c: AppContext) =>
-      CategoryController.updateCategory(c),
+    this.categoryRoutes.put(
+      "/:id",
+      (c: AppContext) => CategoryController.updateCategory(c),
+      {
+        beforeHandle: [verifyToken().beforeHandle],
+      },
     );
   }
 }

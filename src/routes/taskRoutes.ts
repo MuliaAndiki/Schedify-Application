@@ -1,5 +1,6 @@
 import { AppContext } from "@/contex/app-context";
 import TaskController from "@/controllers/TaskController";
+import { verifyToken } from "@/middlewares/auth";
 import Elysia from "elysia";
 
 class TaskRouter {
@@ -16,24 +17,50 @@ class TaskRouter {
     this.routes();
   }
   private routes() {
-    this.taskRouter.post("/:id", (c: AppContext) =>
-      TaskController.createTask(c),
+    this.taskRouter.post(
+      "/:id",
+      (c: AppContext) => TaskController.createTask(c),
+      {
+        beforeHandle: [verifyToken().beforeHandle],
+      },
     );
-    this.taskRouter.get("/", (c: AppContext) => TaskController.getTask(c));
-    this.taskRouter.get("/:id", (c: AppContext) =>
-      TaskController.getTaskByID(c),
+    this.taskRouter.get("/", (c: AppContext) => TaskController.getTask(c), {
+      beforeHandle: [verifyToken().beforeHandle],
+    });
+    this.taskRouter.get(
+      "/:id",
+      (c: AppContext) => TaskController.getTaskByID(c),
+      {
+        beforeHandle: [verifyToken().beforeHandle],
+      },
     );
-    this.taskRouter.delete("/", (c: AppContext) =>
-      TaskController.deleteTask(c),
+    this.taskRouter.delete(
+      "/",
+      (c: AppContext) => TaskController.deleteTask(c),
+      {
+        beforeHandle: [verifyToken().beforeHandle],
+      },
     );
-    this.taskRouter.delete("/:id", (c: AppContext) =>
-      TaskController.deleteTaskByID(c),
+    this.taskRouter.delete(
+      "/:id",
+      (c: AppContext) => TaskController.deleteTaskByID(c),
+      {
+        beforeHandle: [verifyToken().beforeHandle],
+      },
     );
-    this.taskRouter.put("/:id", (c: AppContext) =>
-      TaskController.updateTask(c),
+    this.taskRouter.put(
+      "/:id",
+      (c: AppContext) => TaskController.updateTask(c),
+      {
+        beforeHandle: [verifyToken().beforeHandle],
+      },
     );
-    this.taskRouter.post("/done/:id", (c: AppContext) =>
-      TaskController.doneTask(c),
+    this.taskRouter.post(
+      "/done/:id",
+      (c: AppContext) => TaskController.doneTask(c),
+      {
+        beforeHandle: [verifyToken().beforeHandle],
+      },
     );
   }
 }

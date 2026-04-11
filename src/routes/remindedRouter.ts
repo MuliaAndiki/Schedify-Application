@@ -1,5 +1,6 @@
 import { AppContext } from "@/contex/app-context";
 import RemidedController from "@/controllers/RemidedController";
+import { verifyToken } from "@/middlewares/auth";
 import Elysia from "elysia";
 
 class RemindedRoutes {
@@ -17,20 +18,40 @@ class RemindedRoutes {
   }
 
   private routes() {
-    this.remindedRoutes.post("/", (c: AppContext) =>
-      RemidedController.createReminder(c),
+    this.remindedRoutes.post(
+      "/",
+      (c: AppContext) => RemidedController.createReminder(c),
+      {
+        beforeHandle: [verifyToken().beforeHandle],
+      },
     );
-    this.remindedRoutes.delete("/:id", (c: AppContext) =>
-      RemidedController.deleteRemindedById(c),
+    this.remindedRoutes.delete(
+      "/:id",
+      (c: AppContext) => RemidedController.deleteRemindedById(c),
+      {
+        beforeHandle: [verifyToken().beforeHandle],
+      },
     );
-    this.remindedRoutes.put("/:id", (c: AppContext) =>
-      RemidedController.updateReminded(c),
+    this.remindedRoutes.put(
+      "/:id",
+      (c: AppContext) => RemidedController.updateReminded(c),
+      {
+        beforeHandle: [verifyToken().beforeHandle],
+      },
     );
-    this.remindedRoutes.delete("/", (c: AppContext) =>
-      RemidedController.deleteReminder(c),
+    this.remindedRoutes.delete(
+      "/",
+      (c: AppContext) => RemidedController.deleteReminder(c),
+      {
+        beforeHandle: [verifyToken().beforeHandle],
+      },
     );
-    this.remindedRoutes.get("/", (c: AppContext) =>
-      RemidedController.getReminded(c),
+    this.remindedRoutes.get(
+      "/",
+      (c: AppContext) => RemidedController.getReminded(c),
+      {
+        beforeHandle: [verifyToken().beforeHandle],
+      },
     );
   }
 }
